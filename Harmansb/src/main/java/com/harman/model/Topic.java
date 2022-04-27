@@ -1,9 +1,20 @@
 package com.harman.model;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Topic {
+	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	String id;
 	String name;
 	String description;
+	
+	public Topic() {}
 	
 	public Topic(String id, String name, String description) {
 		super();

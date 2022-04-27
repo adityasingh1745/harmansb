@@ -2,7 +2,11 @@ package com.harman.controller;
 import java.util.*;
 import com.harman.model.Topic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,16 +17,33 @@ public class TopicController {
 //		return "All the topics";
 //	}
 	
+	@Autowired
+	private TopicService topicService;
+
 	@RequestMapping("/topics")
 	public List<Topic> getAllTopics(){
-		return allTopics();
+		return topicService.getAllTopics();
 	}
 	
-	List<Topic> allTopics(){
-		return Arrays.asList(
-				new Topic("spring", "spring framework", "description about spring framework"),
-				new Topic("java","java framework","description about java framework"),
-				new Topic("javascript","javascript framework","description about javascript framework")
-				);
+	@RequestMapping("/topics/{id}")
+	public Topic getTopic(@PathVariable String id) {
+		return topicService.getTopic(id);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/topics")
+	public void addTopic(@RequestBody Topic topic) {
+		topicService.addTopic(topic);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/topics/{id}")
+	public void addTopic(@RequestBody Topic topic, @PathVariable String id) {
+		topicService.updateTopic(topic, id);
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/topics/{id}")
+	public void addTopic(@PathVariable String id) {
+		topicService.deleteTopic(id);
+	}
+	
+	
 }
