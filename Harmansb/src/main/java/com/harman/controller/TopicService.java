@@ -47,16 +47,18 @@ public class TopicService {
 	}
 
 	public void updateTopic(Topic topicReceived, String idReceived) {
-		for(int i=0; i<topics.size(); i++) {
-			Topic topik = topics.get(i);
-			if(topik.getId().equals(idReceived)) {
-				topics.set(i, topicReceived);
-			}
-		}
-		
+//		for(int i=0; i<topics.size(); i++) {
+//			Topic topik = topics.get(i);
+//			if(topik.getId().equals(idReceived)) {
+//				topics.set(i, topicReceived);
+//			}
+//		}
+
+		topicRepository.save(topicReceived);
 	}
 	
 	public void deleteTopic(String id) {
-		topics.removeIf(topic -> topic.getId().equals(id));
+		//topics.removeIf(topic -> topic.getId().equals(id));
+		topicRepository.deleteById(id);
 	}
 }
